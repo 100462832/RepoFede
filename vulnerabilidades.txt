@@ -1,3 +1,5 @@
-He encontrado una inyección SQL
+He encontrado una inyección SQL en el inicio de sesión. Ejemplo: hola' OR '1'='1 en user y password
 
 Stored XSS en la funcionalidad de comentarios. Ejemplo: <script>alert(1)</script>
+
+Session hijacking

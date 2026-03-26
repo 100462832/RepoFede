@@ -1,5 +1,6 @@
 import sqlite3
 from flask import Flask, request, render_template, redirect, url_for, session
+from markupsafe import escape
 
 app = Flask(__name__)
 app.secret_key = "supersecreto"
@@ -23,10 +24,10 @@ def index():
         conn = get_db_connection()
         cursor = conn.cursor()
 
-        query = f"SELECT * FROM users WHERE username = '{username}' AND password = '{password}'"
+        query = "SELECT * FROM users WHERE username = ? AND password = ?"
         print(f"[DEBUG] Query ejecutada: {query}")
 
-        cursor.execute(query)
+        cursor.execute(query, (username, password))
         user = cursor.fetchone()
         conn.close()
 
@@ -49,6 +50,7 @@ def comments():
 
     if request.method == "POST":
         content = request.form.get("content", "")
+        content = escape(content)
         author = session["username"]
 
         cursor.execute(
