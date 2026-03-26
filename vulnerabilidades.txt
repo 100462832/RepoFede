@@ -1,1 +1,3 @@
 He encontrado una inyección SQL
+
+Stored XSS en la funcionalidad de comentarios. Ejemplo: <script>alert(1)</script>
